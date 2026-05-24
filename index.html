@@ -523,16 +523,33 @@ const MAX_VIDEO=2;
 
 async function loadYoutube(){
 
-const url=
-`https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&maxResults=${MAX_VIDEO}&channelId=${CHANNEL_ID}&key=${API_KEY}`;
-
 try{
 
-const res=
-await fetch(url);
+// ambil lebih banyak dulu
+const searchUrl=
+`https://www.googleapis.com/youtube/v3/search?part=id&type=video&order=date&maxResults=15&channelId=${CHANNEL_ID}&key=${API_KEY}`;
 
-const data=
-await res.json();
+const searchRes=
+await fetch(searchUrl);
+
+const searchData=
+await searchRes.json();
+
+// ambil semua ID video
+const ids=
+searchData.items
+.map(v=>v.id.videoId)
+.join(",");
+
+// cek durasi video
+const detailUrl=
+`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids}&key=${API_KEY}`;
+
+const detailRes=
+await fetch(detailUrl);
+
+const detailData=
+await detailRes.json();
 
 const container=
 document.getElementById(
@@ -541,30 +558,31 @@ document.getElementById(
 
 container.innerHTML="";
 
-data.items.forEach(v=>{
+let count=0;
 
-const id=
-v.id.videoId;
+for(let v of detailData.items){
+
+if(count>=MAX_VIDEO)
+break;
+
+const duration=
+v.contentDetails.duration;
+
+// skip shorts (<1 menit)
+if(
+duration.includes("S")
+&& !duration.includes("M")
+&& !duration.includes("H")
+){
+continue;
+}
 
 container.innerHTML+=`
 
 <div class="video-card">
 
 <iframe
-
-src="https://www.youtube.com/embed/${id}"
-
-referrerpolicy="strict-origin-when-cross-origin"
-
-allow="
-accelerometer;
-autoplay;
-clipboard-write;
-encrypted-media;
-gyroscope;
-picture-in-picture;
-web-share"
-
+src="https://www.youtube.com/embed/${v.id}"
 allowfullscreen>
 
 </iframe>
@@ -573,7 +591,16 @@ allowfullscreen>
 
 `;
 
-});
+count++;
+
+}
+
+if(count===0){
+
+container.innerHTML=
+"Tidak ada long video";
+
+}
 
 }
 
