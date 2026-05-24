@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Mandor Bangunan Studio</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+background:
+url("images/general-bg.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+/* overlay */
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+rgba(0,0,0,.25);
+
+backdrop-filter:
+blur(5px);
+
+z-index:0;
+
+}
+
+/* wrapper */
+
+.wrapper{
+
+position:relative;
+
+z-index:2;
+
+width:92%;
+
+max-width:1400px;
+
+height:78vh;
+
+display:flex;
+
+gap:24px;
+
+padding:
+95px 32px 32px;
+
+border-radius:34px;
+
+background:
+rgba(255,255,255,.10);
+
+backdrop-filter:
+blur(24px);
+
+border:
+1px solid rgba(255,255,255,.15);
+
+box-shadow:
+
+0 0 30px rgba(255,255,255,.12),
+
+0 0 70px rgba(255,220,150,.08),
+
+inset 0 0 20px rgba(255,255,255,.05);
+
+}
+
+/* title */
+
+.site-title{
+
+position:absolute;
+
+top:22px;
+
+left:50%;
+
+transform:
+translateX(-50%);
+
+padding:12px 28px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.10);
+
+backdrop-filter:
+blur(10px);
+
+font-size:28px;
+
+font-weight:700;
+
+letter-spacing:3px;
+
+white-space:nowrap;
+
+color:#fffdf2;
+
+text-shadow:
+
+0 0 8px rgba(255,255,255,.9),
+
+0 0 18px rgba(255,245,200,.9),
+
+0 0 30px rgba(255,230,150,.8),
+
+0 0 55px rgba(255,220,100,.5);
+
+animation:
+titleGlow 2s infinite alternate;
+
+}
+
+@keyframes titleGlow{
+
+from{
+
+filter:brightness(1);
+
+}
+
+to{
+
+filter:brightness(1.2);
+
+}
+
+}
+
+/* left */
+
+.social-column{
+
+width:140px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+gap:18px;
+
+}
+
+.social-btn{
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.15);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+backdrop-filter:blur(14px);
+
+transition:.3s;
+
+}
+
+.social-btn:hover{
+
+transform:scale(1.1);
+
+}
+
+.social-btn img{
+
+width:28px;
+height:28px;
+
+}
+
+/* vocalist */
+
+.vocalist-card{
+
+width:130px;
+
+padding:16px;
+
+border-radius:24px;
+
+text-decoration:none;
+
+background:
+rgba(255,255,255,.15);
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:12px;
+
+backdrop-filter:blur(16px);
+
+transition:.3s;
+
+}
+
+.vocalist-card:hover{
+
+transform:
+translateY(-5px)
+scale(1.03);
+
+}
+
+.vocalist-card img{
+
+width:95px;
+height:95px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+.vocalist-card span{
+
+color:white;
+
+font-size:15px;
+
+font-weight:700;
+
+}
+
+/* center */
+
+.main-display{
+
+flex:1;
+
+overflow:hidden;
+
+border-radius:28px;
+
+background:
+rgba(255,255,255,.08);
+
+}
+
+.main-display img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+transition:.4s;
+
+}
+
+.main-display img:hover{
+
+transform:scale(1.03);
+
+}
+
+/* right */
+
+.video-column{
+
+width:320px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+gap:18px;
+
+}
+
+.video-card{
+
+height:180px;
+
+overflow:hidden;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.12);
+
+backdrop-filter:blur(18px);
+
+box-shadow:
+0 0 18px rgba(255,255,255,.12);
+
+transition:.3s;
+
+}
+
+.video-card:hover{
+
+transform:
+translateY(-5px);
+
+}
+
+.video-card iframe{
+
+width:100%;
+
+height:100%;
+
+border:none;
+
+display:block;
+
+border-radius:22px;
+
+}
+/* mobile */
+
+@media(max-width:900px){
+
+body{
+
+overflow:auto;
+
+}
+
+.wrapper{
+
+flex-direction:column;
+
+height:auto;
+
+padding:20px;
+
+}
+
+.site-title{
+
+position:relative;
+
+top:auto;
+
+left:auto;
+
+transform:none;
+
+text-align:center;
+
+font-size:22px;
+
+margin-bottom:20px;
+
+white-space:normal;
+
+}
+
+.social-column{
+
+width:100%;
+
+flex-direction:row;
+
+flex-wrap:wrap;
+
+}
+
+.main-display{
+
+height:260px;
+
+}
+
+.video-column{
+
+width:100%;
+
+}
+
+.video-card{
+
+height:220px;
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="site-title">
+
+MANDOR BANGUNAN STUDIO
+
+</div>
+
+<!-- LEFT -->
+
+<div class="social-column">
+
+<a href="https://youtube.com/@mandorbangunanstudio"
+target="_blank"
+class="social-btn">
+
+<img src="icons/youtube.png">
+
+</a>
+
+<a href="https://instagram.com/fajar_aminudn99"
+target="_blank"
+class="social-btn">
+
+<img src="icons/instagram.png">
+
+</a>
+
+<a href="https://tiktok.com/@mandorbangunanstudio"
+target="_blank"
+class="social-btn">
+
+<img src="icons/tiktok.png">
+
+</a>
+
+<a href="vocalist.html"
+class="vocalist-card">
+
+<img src="images/vocalist.jpg">
+
+<span>VOCALIST</span>
+
+</a>
+
+</div>
+
+<!-- CENTER -->
+
+<div class="main-display">
+
+<img src="images/main-image.jpg">
+
+</div>
+
+<!-- RIGHT -->
+
+<div
+class="video-column"
+id="youtubeVideos">
+
+Loading...
+
+</div>
+
+</div>
+
+<script>
+
+const API_KEY=
+"AIzaSyCV6vK21RkpPm-SCzBne2HdtFvdje1xbug";
+
+const CHANNEL_ID=
+"UCPWXd_SMHfqryUIjr7i7aug";
+
+const MAX_VIDEO=3;
+
+async function loadYoutube(){
+
+const url=
+`https://www.googleapis.com/youtube/v3/search?part=snippet,id&type=video&order=date&maxResults=${MAX_VIDEO}&channelId=${CHANNEL_ID}&key=${API_KEY}`;
+
+try{
+
+const res=
+await fetch(url);
+
+const data=
+await res.json();
+
+const container=
+document.getElementById(
+"youtubeVideos"
+);
+
+container.innerHTML="";
+
+data.items.forEach(v=>{
+
+const id=
+v.id.videoId;
+
+container.innerHTML+=`
+
+<div class="video-card">
+
+<iframe
+
+src="https://www.youtube.com/embed/${id}"
+
+referrerpolicy="strict-origin-when-cross-origin"
+
+allow="
+accelerometer;
+autoplay;
+clipboard-write;
+encrypted-media;
+gyroscope;
+picture-in-picture;
+web-share"
+
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+`;
+
+});
+
+}
+
+catch(e){
+
+document.getElementById(
+"youtubeVideos"
+).innerHTML=
+"Gagal memuat video";
+
+}
+
+}
+
+loadYoutube();
+
+</script>
+
+</body>
+</html>
